@@ -1,0 +1,23 @@
+name: percnet_v2
+enc_in: 20
+n_free: 3
+n_quantiles: 9
+linear_hidden: 36
+decomp_kernel: 13
+prnn_seg_len: 24
+prnn_dim: 12
+prnn_dropout: 0.1
+dropout: 0.1
+horizon_cond_head: true
+prob_detach: false       # joint training (paper configuration)
+use_cycle_queue: true
+use_last_value_anchor: true
+cycle_gate: false
+use_eesm: false          # v2-eesm candidate toggles this on
+lam_pin: 1.0
+lam_nll: 1.0
+lam_tail: 0.5
+lam_mono: 0.1
+lam_dec: 10.0
+revin_scope: loads
+point_loss: mape

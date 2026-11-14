@@ -1,0 +1,13 @@
+name: percnet_xcpd
+backbone: percnet_v2
+patch_len: 6             # h=24 -> 4 patches; h=48/72/96 -> 8/12/16
+bands: 3                 # low / mid / high spectral energy
+knn: 2                   # ego-graph neighbours per node
+hidden: 16
+experts: 3
+router_hidden: 16
+gate_init: 1.0           # identity comes from zero-init `out`; a zero gate
+                         # makes tanh(gate)*out dead (exactly zero gradient)
+freeze_backbone: true
+joint_finetune: false
+residual_loss: l1

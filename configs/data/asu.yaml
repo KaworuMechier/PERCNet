@@ -1,0 +1,15 @@
+dataset: ASU
+file: data/dataset_input.csv
+seq_len: 168
+horizons: [24, 48, 72, 96]
+train_frac: 0.8
+valid_frac: 0.1
+normalize: 2            # train-only robust max/P95x2 scale, clip +/-10
+targets: [0, 1, 2]      # KW, CHWTON, HTMBTU
+n_free: 3
+use_calendar: true
+use_rolling_weather: true
+calendar_columns: [12, 13, 14, 15]
+rolling_columns: [16, 17, 18, 19]
+physics_identity: true
+cel_coef: [0.003412, 0.0120, 1.0]

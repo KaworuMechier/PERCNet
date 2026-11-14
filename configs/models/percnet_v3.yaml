@@ -1,0 +1,40 @@
+# Base v3 config.  The final paper model is the wx variant, which overrides
+# use_exo_channels=False and weather_context=True via registry.V3_VARIANTS.
+name: percnet_v3
+enc_in: 20
+n_free: 3
+n_chan: 12               # measured channels fed to the streams (loads + weather)
+temp_idx: 3              # TEMP column of the ASU layout
+n_quantiles: 9
+linear_hidden: 36
+decomp_kernel: 13
+prnn_seg_len: 24
+prnn_dim: 12
+prnn_dropout: 0.3        # v3 carries more capacity than v2; 0.1 under-regularises
+dropout: 0.1
+horizon_cond_head: true
+prob_detach: false
+use_cycle_queue: true
+use_last_value_anchor: true
+cycle_gate: false
+use_eesm: true
+
+# v3 switches -- the model-name variant table in registry.V3_VARIANTS sets
+# these; every ablation is an explicit entry, not a substring of the name.
+use_exo_channels: true   # noexo: 3 load channels only (v2 behaviour)
+fusion_head: true        # nofusion: s + t + local elementwise
+degree_response: true    # nodeg: no hinged temperature response
+weather_context: false   # wx: recent observed weather stats into the fusion
+n_exo: 9                 # measured weather channels (3..11)
+wx_windows: [24]         # trailing windows summarised; wx72 adds 72 h
+degree_breakpoints: 3    # learned balance points, initialised 12/20/28 degC
+degree_signs: [1.0, 1.0, -1.0]   # kW and cooling rise, heating falls, with T
+                         # the response is additive; the degC basis is not fed
+                         # to the fusion head (it dominated a O(1) input)
+
+lam_pin: 1.0
+lam_nll: 1.0
+lam_tail: 0.5
+lam_mono: 0.1
+lam_dec: 10.0
+point_loss: mape

@@ -1,0 +1,17 @@
+# Final point-table setup (descriptive; scripts/run_all_3090.sh is authoritative).
+protocol: official        # main tables: test-selected, disclosed
+honest_check: true        # appendix: val-selected robustness run
+models: [percnet_v3_wx, festrnn, crossformer, segrnn, mamba,
+         dlinear, itransformer, film]
+horizons: [24, 48, 72, 96]
+seeds: [2024, 2025, 2026, 2027, 2028]
+screen:
+  horizons: [24]
+  seeds: [2024, 2025, 2026]
+  models: [percnet_v3_wx, percnet_v3_noexo, percnet_v3_nodeg,
+           percnet_v3_plain, percnet_v3_wxw, percnet_v3_wxh64,
+           percnet_v3_wx_nocyc, percnet_v3_wx_noanc,
+           percnet_v3_wx_ndec, percnet_v3_wx_point]
+selection: test_mae       # official protocol (see PAPER_PROTOCOL.md)
+ema: false
+swa: false
